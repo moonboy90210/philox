@@ -11,7 +11,7 @@
       --border:     rgba(201,168,76,0.15);
     }
 
-    /* ── RESET / BASE ──────────────────────────────────── */
+    /* ── RESET / BASE ─────────────── */
     *, *::before, *::after { box-sizing: border-box; }
 
 	html {
@@ -35,7 +35,7 @@
       z-index: 9999;
     }
 
-    /* ── NAVBAR ────────────────────────────────────────── */
+    /* ── NAVBAR ──────────── */
     .navbar {
       border-bottom: 1px solid var(--border);
       padding: 22px 48px;
@@ -73,7 +73,7 @@
     }
     .nav-icon-btn svg { width: 15px; height: 15px; }
 
-    /* ── HERO ──────────────────────────────────────────── */
+    /* ── HERO ───────────────── */
     .hero {
       text-align: center;
       padding: 72px 16px 48px;
@@ -123,7 +123,7 @@
       animation: fadeUp 0.7s ease forwards 0.8s;
     }
 
-    /* ── CAROUSEL SECTION ──────────────────────────────── */
+    /* ── CAROUSEL SECTION ──────────── */
     .carousel-section {
       padding: 48px 0 80px;
     }
@@ -246,7 +246,7 @@
       font-style: italic;
     }
 
-    /* ── NAV BUTTONS ───────────────────────────────────── */
+    /* ── NAV BUTTONS ─────────────── */
     .carousel-btn {
       position: absolute;
       top: 50%;
@@ -276,7 +276,7 @@
     .btn-prev { left: 8px; }
     .btn-next { right: 8px; }
 
-    /* ── DOTS ──────────────────────────────────────────── */
+    /* ── DOTS ───────────────────── */
     .carousel-dots {
       display: flex;
       justify-content: center;
@@ -307,13 +307,13 @@
       color: rgba(201,168,76,0.3);
     }
 
-    /* ── ANIMATION ─────────────────────────────────────── */
+    /* ── ANIMATION ───────────────────── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(22px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── RESPONSIVE TWEAKS ─────────────────────────────── */
+    /* ── RESPONSIVE TWEAKS ──────────── */
     @media (max-width: 768px) {
       .navbar { padding: 18px 20px; }
 
