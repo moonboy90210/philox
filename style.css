@@ -68,7 +68,7 @@
       transform: scale(1.1);
       color: var(--gold);
     }
-    .nav-icon-btn svg { width: 15px; height: 15px; fill: var(--gold); }
+    .nav-icon-btn svg { width: 15px; height: 15px; }
 
     /* ── HERO ──────────────────────────────────────────── */
     .hero {
