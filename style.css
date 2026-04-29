@@ -1,0 +1,327 @@
+
+   :root {
+      --black:      #080808;
+      --deep:       #111111;
+      --card-bg:    #141414;
+      --gold:       #C9A84C;
+      --gold-light: #E2C27D;
+      --gold-dim:   rgba(201,168,76,0.18);
+      --white:      #f5f0e8;
+      --muted:      #777;
+      --border:     rgba(201,168,76,0.15);
+    }
+
+    /* ── RESET / BASE ──────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      background-color: var(--black);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Subtle grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── NAVBAR ────────────────────────────────────────── */
+    .navbar {
+      border-bottom: 1px solid var(--border);
+      padding: 22px 48px;
+      background: transparent !important;
+    }
+
+    .navbar-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: 5px;
+      color: var(--white) !important;
+    }
+    .navbar-brand span { color: var(--gold); }
+
+    .nav-icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.35);
+      background: transparent;
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 10px;
+      transition: background 0.3s, border-color 0.3s, transform 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-icon-btn:hover {
+      background: var(--gold-dim);
+      border-color: var(--gold);
+      transform: scale(1.1);
+      color: var(--gold);
+    }
+    .nav-icon-btn svg { width: 15px; height: 15px; fill: var(--gold); }
+
+    /* ── HERO ──────────────────────────────────────────── */
+    .hero {
+      text-align: center;
+      padding: 72px 16px 48px;
+    }
+
+    .hero-eyebrow {
+      font-size: 9px;
+      letter-spacing: 6px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.2s;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 9vw, 100px);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -1px;
+      color: var(--white);
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.4s;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-subtitle {
+      font-size: 9px;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 16px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.6s;
+    }
+
+    .hero-rule {
+      width: 48px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 24px auto 0;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.8s;
+    }
+
+    /* ── CAROUSEL SECTION ──────────────────────────────── */
+    .carousel-section {
+      padding: 48px 0 80px;
+    }
+
+    /* Outer container for perspective */
+    .cards-stage {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      height: 560px;
+      margin: 0 auto;
+      perspective: 1400px;
+    }
+
+    /* Individual card */
+    .persona-card {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 280px;
+      margin-left: -140px;   /* centre pivot */
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.55s cubic-bezier(0.23, 1, 0.32, 1);
+      will-change: transform, opacity, filter;
+      background: var(--card-bg);
+      border: 1px solid rgba(201,168,76,0.07);
+    }
+
+    /* ── CARD POSITIONS ── */
+    .persona-card[data-pos="prev2"] {
+      transform: translateX(-330px) scale(0.72) rotateY(18deg);
+      z-index: 1; opacity: 0.3; filter: brightness(0.45) grayscale(30%);
+    }
+    .persona-card[data-pos="prev"] {
+      transform: translateX(-195px) scale(0.84) rotateY(10deg);
+      z-index: 2; opacity: 0.6; filter: brightness(0.65) grayscale(15%);
+    }
+    .persona-card[data-pos="active"] {
+      transform: translateX(0) scale(1) rotateY(0deg);
+      z-index: 5; opacity: 1; filter: brightness(1) grayscale(0%);
+      border-color: rgba(201,168,76,0.4);
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.1),
+                  0 40px 80px rgba(0,0,0,0.75),
+                  0 0 50px rgba(201,168,76,0.07);
+    }
+    .persona-card[data-pos="next"] {
+      transform: translateX(195px) scale(0.84) rotateY(-10deg);
+      z-index: 2; opacity: 0.6; filter: brightness(0.65) grayscale(15%);
+    }
+    .persona-card[data-pos="next2"] {
+      transform: translateX(330px) scale(0.72) rotateY(-18deg);
+      z-index: 1; opacity: 0.3; filter: brightness(0.45) grayscale(30%);
+    }
+    .persona-card[data-pos="hidden-l"] {
+      transform: translateX(-520px) scale(0.6);
+      z-index: 0; opacity: 0; pointer-events: none;
+    }
+    .persona-card[data-pos="hidden-r"] {
+      transform: translateX(520px) scale(0.6);
+      z-index: 0; opacity: 0; pointer-events: none;
+    }
+
+    /* Gold shimmer on active card top-left */
+    .persona-card[data-pos="active"]::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.07) 0%, transparent 55%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Card image area */
+    .card-image {
+      width: 100%;
+      height: 360px;
+      display: block;
+      object-fit: cover;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* SVG placeholder fills the image slot */
+    .card-image svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Card body text */
+    .card-body-content {
+      padding: 20px 22px 24px;
+      background: var(--card-bg);
+    }
+
+    .card-tag {
+      font-size: 8px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .card-title-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .card-desc-text {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      font-style: italic;
+    }
+
+    /* ── NAV BUTTONS ───────────────────────────────────── */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 20;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.4);
+      background: rgba(8,8,8,0.6);
+      color: var(--gold);
+      font-size: 18px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+	  -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .carousel-btn:hover {
+      background: var(--gold-dim);
+      border-color: var(--gold);
+      box-shadow: 0 0 20px rgba(201,168,76,0.18);
+    }
+    .btn-prev { left: 8px; }
+    .btn-next { right: 8px; }
+
+    /* ── DOTS ──────────────────────────────────────────── */
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 38px;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(201,168,76,0.25);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .dot.active {
+      width: 22px;
+      background: var(--gold);
+    }
+
+    /* ── FOOTER ────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 26px 16px;
+      text-align: center;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(201,168,76,0.3);
+    }
+
+    /* ── ANIMATION ─────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE TWEAKS ─────────────────────────────── */
+    @media (max-width: 768px) {
+      .navbar { padding: 18px 20px; }
+
+      .cards-stage { height: 480px; }
+
+      .persona-card[data-pos="prev2"],
+      .persona-card[data-pos="next2"] { opacity: 0; pointer-events: none; }
+
+      .persona-card[data-pos="prev"]  { transform: translateX(-120px) scale(0.78) rotateY(8deg); }
+      .persona-card[data-pos="next"]  { transform: translateX(120px)  scale(0.78) rotateY(-8deg); }
+
+      .btn-prev { left: 2px; }
+      .btn-next { right: 2px; }
+    }
